@@ -1,0 +1,93 @@
+{
+  "name": "@ocelotlstudio/laranuxt",
+  "version": "1.0.0",
+  "description": "Nuxt cli extension for use with laravel as backend",
+  "main": "./lib/module.js",
+  "types": "./types/module.d.ts",
+  "engines": {
+    "node": ">=8.10.0"
+  },
+  "scripts": {
+    "assets": "cpr ./src/templates/ ./lib/templates/",
+    "clean": "rimraf lib types",
+    "build": "yarn clean && tsc -p tsconfig.build.json && yarn assets",
+    "lint": "eslint --ext .ts --ignore-path .gitignore ./src",
+    "lint:fix": "npm run lint -- --fix",
+    "lint:check": "eslint --print-config .eslintrc.json",
+    "test": "jest",
+    "validate": "yarn lint:check && yarn lint",
+    "release": "yarn test && jest-badges-readme && yarn build && git add lib types 'README.md' && standard-version -a"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OcelotlStudio/laranuxt.git"
+  },
+  "keywords": [
+    "laravel",
+    "nuxt",
+    "nuxt-module",
+    "spa",
+    "vue"
+  ],
+  "author": "OcelotlStudio <contacto@ocelotlstudio.com> (https://ocelotlstudio.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/OcelotlStudio/laranuxt/issues"
+  },
+  "homepage": "https://github.com/OcelotlStudio/laranuxt#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@nuxt/types": "^2.14.5",
+    "@nuxtjs/module-test-utils": "^1.6.3",
+    "@olavoparno/jest-badges-readme": "^1.5.1",
+    "@types/fs-extra": "^9.0.1",
+    "@types/jest": "^26.0.13",
+    "@types/lodash": "^4.14.161",
+    "@types/request-promise": "^4.1.46",
+    "@types/tmp": "^0.2.0",
+    "@typescript-eslint/eslint-plugin": "^4.1.0",
+    "@typescript-eslint/parser": "^4.1.0",
+    "cpr": "^3.0.1",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^7.9.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-promise": "^4.2.1",
+    "husky": "^4.3.0",
+    "jest": "^26.4.2",
+    "loglevel": "^1.7.0",
+    "nuxt": "^2.14.5",
+    "prettier": "^2.1.1",
+    "rimraf": "^3.0.2",
+    "standard-version": "^9.0.0",
+    "ts-jest": "^26.3.0",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.2"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "execa": "^5.0.0",
+    "fs-extra": "^9.0.1",
+    "lodash": "^4.17.20"
+  },
+  "optionalDependencies": {},
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn validate",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
+}

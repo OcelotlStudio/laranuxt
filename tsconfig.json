@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "declaration": true,
+    "declarationDir": "./types",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "baseUrl": ".",
+    "types": [
+      "@types/node",
+      "@nuxt/types",
+      "@types/jest"
+    ],
+    "esModuleInterop": true
+  },
+  "include": [
+    "jest.config.js",
+    "src/templates/sw-cache.js",
+    "src/**/*.ts",
+    "tests/**/*.ts",
+    "tests/fixture/**/nuxt.config.js",
+    "types/**/*.d.ts"
+  ]
+}
