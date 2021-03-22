@@ -7,17 +7,12 @@ export interface Options {
         host?: string;
         port: number;
     };
-    swCache?: boolean | {
-        name: string;
-        fileName?: string;
-        endpoint?: string;
-    };
     dotEnvExport?: boolean;
     envFile?: string;
 }
-export declare const validateOptions: (options: Options) => options is Required<Pick<Options, "server" | "root" | "publicDir" | "swCache" | "dotEnvExport" | "envFile">> & Pick<Options, "outputPath">;
+export declare const validateOptions: (options: Options) => options is Required<Pick<Options, "server" | "root" | "publicDir" | "dotEnvExport" | "envFile">> & Pick<Options, "outputPath">;
 export declare const getConfiguration: (nuxtOptions: NuxtConfig, overwrites?: Options | undefined) => {
-    options: Required<Pick<Options, "server" | "root" | "publicDir" | "swCache" | "dotEnvExport" | "envFile">> & Pick<Options, "outputPath">;
+    options: Required<Pick<Options, "server" | "root" | "publicDir" | "dotEnvExport" | "envFile">> & Pick<Options, "outputPath">;
     nuxt: {
         urlPath: string;
         routerPath: string;
@@ -35,11 +30,6 @@ export declare const getConfiguration: (nuxtOptions: NuxtConfig, overwrites?: Op
         dest: string;
         fallback: string;
         additional: string | false;
-    };
-    cache: false | {
-        name: string;
-        fileName: string;
-        endpoint: string;
     };
     routerBase: string;
 };
