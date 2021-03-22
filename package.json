@@ -8,9 +8,8 @@
     "node": ">=8.10.0"
   },
   "scripts": {
-    "assets": "cpr ./src/templates/ ./lib/templates/",
     "clean": "rimraf lib types",
-    "build": "yarn clean && tsc -p tsconfig.build.json && yarn assets",
+    "build": "yarn clean && tsc -p tsconfig.build.json",
     "lint": "eslint --ext .ts --ignore-path .gitignore ./src",
     "lint:fix": "npm run lint -- --fix",
     "lint:check": "eslint --print-config .eslintrc.json",

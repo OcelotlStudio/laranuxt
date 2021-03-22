@@ -1,5 +1,5 @@
 import { Module } from '@nuxt/types';
-import { moduleKey, laravelAppEnv, nuxtOutputEnv } from './constants';
+import { laravelAppEnv, nuxtOutputEnv, moduleKey } from './constants';
 import { Options } from './options';
 declare const laravelModule: Module<Options>;
 declare module '@nuxt/types' {
