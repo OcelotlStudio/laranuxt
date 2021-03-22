@@ -1,15 +1,7 @@
 # Nuxt Laravel
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](https://commitizen.github.io/cz-cli/)
-[![npm](https://img.shields.io/npm/v/@ocelotlstudio/nuxt-laravel)](https://www.npmjs.com/package/nuxt-laravel)
-
-**Jest coverage:**
-
-| Statements                  | Branches                | Functions                 | Lines             |
-| --------------------------- | ----------------------- | ------------------------- | ----------------- |
-| ![Statements](https://img.shields.io/badge/Coverage-91.07%25-brightgreen.svg "Make me better!") | ![Branches](https://img.shields.io/badge/Coverage-79.55%25-red.svg "Make me better!") | ![Functions](https://img.shields.io/badge/Coverage-76.47%25-red.svg "Make me better!") | ![Lines](https://img.shields.io/badge/Coverage-90.74%25-brightgreen.svg "Make me better!") |
-
-Looking for the old CLI extension? [nuxt-laravel](https://github.com/m2sd/nuxt-laravel/tree/legacy).
+[![npm](https://img.shields.io/npm/v/@ocelotlstudio/laranuxt)](https://www.npmjs.com/package/@ocelotlstudio/laranuxt)
 
 This module makes it easy to integrate a [NuxtJS](https://nuxtjs.org) SPA into a [Laravel](https://laravel.com) application.  
 The implementation is based on [laravel-nuxt-js](https://github.com/skyrpex/laravel-nuxt-js) by [skyrpex](https://github.com/skyrpex).
@@ -25,24 +17,22 @@ There is a companion extension also based on [skyrpex](https://github.com/skyrpe
 * Easily deploy an existing Nuxt app inside a Laravel application or vice versa
 * Test your Nuxt app with live reloading, HMR and the auto-configured Laravel test server
 * Seamlessly integrate Nuxt into the URL resolution of Laravel
-* Share cookies and session state between frontend (Nuxt) and backend (Laravel) without the need for an API token
+* Easy integration with sanctum
 
 ## Setup
 
 ### Installation
 
-> **Hint:** If your stating fresh consider cloning [nuxt-laravel-starter](https://github.com/m2sd/nuxt-laravel-starter)
-
-Install this package and its peer dependencies.
+Install this package.
 
 ```bash
-npm install --save-dev @nuxtjs/axios @nuxtjs/proxy @ocelotlstudio/nuxt-laravel
+npm install --save-dev @ocelotlstudio/laranuxt
 ```
 
 or
 
 ```bash
-yarn add --dev @nuxtjs/axios @nuxtjs/proxy @ocelotlstudio/nuxt-laravel
+yarn add --dev @ocelotlstudio/laranuxt
 ```
 
 #### Typescript
@@ -56,7 +46,7 @@ To have code completion/type checking on the `Configuration` interface from `@nu
     "types": [
         "@nuxt/types",
         // ...
-        "@ocelotlstudio/nuxt-laravel"
+        "@ocelotlstudio/laranuxt"
     ]
   }
 }
@@ -71,7 +61,7 @@ export default {
   ssr: false,
   modules: [
     // Include it first, so that configuration alterations are propagated to other modules
-    '@ocelotlstudio/nuxt-laravel'
+    '@ocelotlstudio/laranuxt'
     // ... other modules
   ]
 }
@@ -85,7 +75,7 @@ Otherwise set the path to your Laravel root folder through the configuration.
 export default {
   ssr: false,
   modules: [
-    '@ocelotlstudio/nuxt-laravel'
+    '@ocelotlstudio/laranuxt'
   ],
   laravel: {
     root: './path/to/laravel'
@@ -101,7 +91,6 @@ export default {
 | `publicDir`    | `string`              | The folder where laravel serves assets from (is resolved relative to `root`)                                                                                                  | `'public'`      |
 | `outputPath`   | `string`              | File location to which an additional index route will be rendered, useful if you want to store it in a folder outside of Laravels public dir (is resolved relative to `root`) | `null`          |
 | `server`       | `boolean` or `object` | Settings for the Laravel testserver                                                                                                                                           | *(see below)*   |
-| `swCache`      | `boolean` or `object` | Settings for a cache endpoint workbox extensions using `@nuxtjs/pwa`                                                                                                          | *(see below)*   |
 | `dotEnvExport` | `boolean`             | Whether the `NUXT_OUTPUT_PATH` varibale should be written to the `.env` file in the laravel root directory                                                                    | `false`         |
 | `envFile`      | `string`              | `.env` file name, useful if you want to use multiple enviroment settings | `null`     | 
 
@@ -116,28 +105,6 @@ Setting this to `true` is equivalent to omitting it and will simply use the defa
 | ------ | -------- | --------------------------- | ---------------------------- |
 | `host` | `string` | Hostname for the testserver | `nuxtConfig.server.host`     |
 | `port` | `number` | Port for the testserver     | `nuxtConfig.server.port + 1` |
-
-#### The `swCache` setting
-
-To use this setting you have to install the optional dependency `@nuxtjs/pwa`.
-
-```bash
-npm install --save-dev @nuxtjs/pwa
-```
-
-or
-
-```bash
-yarn add --dev @nuxtjs/pwa
-```
-
-If this setting is set to `true` the caching endpoint will be added with the default configuration.
-
-| option     | type     | description                                                                               | default                   |
-| ---------- | -------- | ----------------------------------------------------------------------------------------- | ------------------------- |
-| `name`     | `string` | The name for the cache to which values are written                                        | `'__nuxt_laravel'`        |
-| `fileName` | `string` | The name for the file generated in the nuxt buildDir                                      | `'workbox.cache.js'`      |
-| `endpoint` | `string` | The endpoint to which values can be `post`ed/from which values can be gotten (`get`) from | `'/__nuxt_laravel_cache'` |
 
 #### Path resolution inside `publicDir`
 
@@ -204,7 +171,7 @@ Laravel integration is accomplished through two environment variables.
      ssr: false,
      // ... other config
      modules: [
-       '@ocelotlstudio/nuxt-laravel',
+       '@ocelotlstudio/laranuxt',
        // ... other modules
      ]
    }
